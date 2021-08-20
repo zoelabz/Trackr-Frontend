@@ -1,17 +1,19 @@
 <template>
   <div class="center">
 
+    <title>Forgot Password</title>
+
     <img alt="Trackr Logo" src="../assets/logo.png" id="trackrLogo">
 
-    <!-- <h1 style="text-align: center;">Account Login</h1> -->
+    <!-- <h1 style="text-align: center;">Reset Password Login</h1> -->
     
-    <div id="accountLoginBlock" class="is-centered" style="text-align: center;">
+    <div id="resetPasswordBlock" class="is-centered" style="text-align: center;">
 
       <div class="field">
-        <label class="label">Account Login | Enter Your Email</label>
+        <label class="label">Reset Password | Enter Your Email</label>
 
         <div class="control has-icons-left has-icons-right">
-          <input class="input emailIsNotEmpty() ? 'is-success' : 'is-danger'" type="email" v-model="email" placeholder="Your Email" autofocus="true">
+          <input class="input" type="email" v-model="email" placeholder="Enter Your Email" autofocus="true">
           <span class="icon is-small is-left">
             <i class="fas fa-envelope"></i>
           </span>
@@ -21,30 +23,16 @@
         </div>
 
       </div>
-
-      <div class="field">
-        <label class="label">Enter Your Password</label>
-        <div class="control has-icons-left has-icons-right">
-          <input class="input passwordIsNotEmpty() ? 'is-success' : 'is-danger'" @keyup.enter="login()" type="password" v-model="password" placeholder="Your Password">
-          <span class="icon is-small is-left">
-            <i class="fas fa-envelope"></i>
-          </span>
-          <span class="icon is-small is-right">
-            <i class="fas fa-exclamation-triangle"></i>
-          </span>
-        </div>
-
-      </div>      
 
       <br/>
       <div class="field">
           <button class="button is-primary" style="width: 100%;" 
-            @click="login()" :disabled="!loginFieldsNotEmpty()">Login</button>
+            @click="resetPassword()" :disabled="!emailIsNotEmpty()">Send Password Reset Link</button>
       </div>
 
       <div class="column">
         <p>
-          <router-link to='/forgot/password'>Forgot Your Password ? Click Here to Reset</router-link>
+          <router-link to='/'>Have An Account ? Login Here</router-link>
         </p>
       </div>
 
@@ -75,8 +63,6 @@ export default {
 
       email: '',
 
-      password: '',
-
       qouteOfTheDay: ''
 
     }
@@ -85,24 +71,29 @@ export default {
 
   methods: {
 
-    async login() {
+    async resetPassword() {
 
       try {
 
-          await axios.post('http://127.0.0.1:4200/api/auth/validate',
+          await axios.post('http://127.0.0.1:4200/api/auth/reset/password',
                             {
-                              email: this.email,
-                              password: this.password
+                              email: this.email
 
                             }).then( (res) => {
 
                               const data = res.data
 
-                              if (data.status == "ERROR") {
+                              if (data.status == "SUCCESS") {
                                 //Toasting
                                 Swal.fire({
                                   title: 'Error!',
-                                  text: 'Please Enter Correct Email and Password Combination',
+                                  text: 'Password Reset Email Sent Successfully',
+                                  icon: 'error'
+                                })
+                              }else {
+                                Swal.fire({
+                                  title: 'Error!',
+                                  text: 'Email does not Exists',
                                   icon: 'error'
                                 })
                               }
@@ -113,7 +104,7 @@ export default {
                             })
 
         //Clear Password Input
-        this.password = ''
+        this.email = ''
 
       }catch (error) {
 
@@ -128,20 +119,6 @@ export default {
       if (parseInt(this.email.length) > 1)
         return true
 
-    },
-
-    passwordIsNotEmpty() {
-
-      if (parseInt(this.password.length) > 1)
-        return true
-
-    },
-
-    loginFieldsNotEmpty() {
-      if (this.passwordIsNotEmpty() == true && this.emailIsNotEmpty() == true)
-        return true
-      else
-        return false
     },
 
 
@@ -187,7 +164,7 @@ export default {
   text-align: center;
 }
 
-#accountLoginBlock {
+#resetPasswordBlock {
   width: 100%;
   padding-left: 35%;
   padding-right: 35%;
