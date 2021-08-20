@@ -3,46 +3,52 @@
 
     <title>Forgot Password</title>
 
-    <img alt="Trackr Logo" src="../assets/logo.png" id="trackrLogo">
+    <img alt="Trackr Logo" src="@/assets/logo.png" id="trackrLogo">
 
     <!-- <h1 style="text-align: center;">Reset Password Login</h1> -->
     
-    <div id="resetPasswordBlock" class="is-centered" style="text-align: center;">
+    <div class="columns">
+      
+      <div class="column is-one-third"></div>
 
-      <div class="field">
-        <label class="label">Reset Password | Enter Your Email</label>
+      <div class="column is-one-third" style="text-align: center;">
 
-        <div class="control has-icons-left has-icons-right">
-          <input class="input" type="email" v-model="email" placeholder="Enter Your Email" autofocus="true">
-          <span class="icon is-small is-left">
-            <i class="fas fa-envelope"></i>
-          </span>
-          <span class="icon is-small is-right">
-            <i class="fas fa-exclamation-triangle"></i>
-          </span>
+        <div class="field">
+          <label class="label">Reset Password | Enter Your Email</label>
+
+          <div class="control has-icons-left has-icons-right">
+            <input class="input" type="email" v-model="email" placeholder="Enter Your Email" autofocus="true">
+            <span class="icon is-small is-left">
+              <i class="fas fa-envelope"></i>
+            </span>
+            <span class="icon is-small is-right">
+              <i class="fas fa-exclamation-triangle"></i>
+            </span>
+          </div>
+
         </div>
 
+        <br/>
+        <div class="field">
+            <button class="button is-primary" style="width: 100%;" 
+              @click="resetPassword()" :disabled="!emailIsNotEmpty()">Send Password Reset Link</button>
+        </div>
+
+        <div class="column">
+          <p>
+            <router-link to='/'>Have An Account ? Login Here</router-link>
+          </p>
+        </div>
+
+        <div class="column">
+          <br/><br/><br/>
+          <strong>Quote of The Day</strong><br/>
+          <p>{{ qouteOfTheDay }}</p>
+        </div>
+
+
       </div>
-
-      <br/>
-      <div class="field">
-          <button class="button is-primary" style="width: 100%;" 
-            @click="resetPassword()" :disabled="!emailIsNotEmpty()">Send Password Reset Link</button>
-      </div>
-
-      <div class="column">
-        <p>
-          <router-link to='/'>Have An Account ? Login Here</router-link>
-        </p>
-      </div>
-
-      <div class="column">
-        <br/><br/><br/>
-        <strong>Quote of The Day</strong><br/>
-        <p>{{ qouteOfTheDay }}</p>
-      </div>
-
-
+      
     </div>
    
   </div>
@@ -75,7 +81,7 @@ export default {
 
       try {
 
-          await axios.post('http://127.0.0.1:4200/api/auth/reset/password',
+          await axios.post(this.$store.state.baseApi + '/api/auth/reset/password',
                             {
                               email: this.email
 
@@ -121,30 +127,12 @@ export default {
 
     },
 
-
-    //Pull Quote of The Day
-    async pullQoD() {
-
-      try {
-        const response = await axios.get('https://quotes.rest/qod?language=en')
-
-        const data = response.data
-
-        this.qouteOfTheDay = data.contents.quotes[0].quote
-
-      }catch (error) {
-        console.log(error);
-
-      }
-      
-    }
-
   },
 
   mounted() {
 
     //Pull Quote of The Day
-    this.pullQoD()
+    this.qouteOfTheDay = this.$store.state.QoD
 
   }
 

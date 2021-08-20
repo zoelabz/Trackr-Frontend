@@ -1,60 +1,68 @@
 <template>
   <div class="center">
 
-    <img alt="Trackr Logo" src="../assets/logo.png" id="trackrLogo">
+    <img alt="Trackr Logo" src="@/assets/logo.png" id="trackrLogo">
 
     <!-- <h1 style="text-align: center;">Account Login</h1> -->
     
-    <div id="accountLoginBlock" class="is-centered" style="text-align: center;">
+    <div class="columns">
+      
+      <div class="column is-one-third"></div>
 
-      <div class="field">
-        <label class="label">Account Login | Enter Your Email</label>
+      <div class="column is-one-third">
 
-        <div class="control has-icons-left has-icons-right">
-          <input class="input emailIsNotEmpty() ? 'is-success' : 'is-danger'" type="email" v-model="email" placeholder="Your Email" autofocus="true">
-          <span class="icon is-small is-left">
-            <i class="fas fa-envelope"></i>
-          </span>
-          <span class="icon is-small is-right">
-            <i class="fas fa-exclamation-triangle"></i>
-          </span>
+
+
+        <div class="field">
+          <label class="label">Account Login | Enter Your Email</label>
+
+          <div class="control has-icons-left has-icons-right">
+            <input class="input emailIsNotEmpty() ? 'is-success' : 'is-danger'" type="email" v-model="email" placeholder="Your Email" autofocus="true">
+            <span class="icon is-small is-left">
+              <i class="fas fa-envelope"></i>
+            </span>
+            <span class="icon is-small is-right">
+              <i class="fas fa-exclamation-triangle"></i>
+            </span>
+          </div>
+
         </div>
 
-      </div>
+        <div class="field">
+          <label class="label">Enter Your Password</label>
+          <div class="control has-icons-left has-icons-right">
+            <input class="input passwordIsNotEmpty() ? 'is-success' : 'is-danger'" @keyup.enter="login()" type="password" v-model="password" placeholder="Your Password">
+            <span class="icon is-small is-left">
+              <i class="fas fa-envelope"></i>
+            </span>
+            <span class="icon is-small is-right">
+              <i class="fas fa-exclamation-triangle"></i>
+            </span>
+          </div>
 
-      <div class="field">
-        <label class="label">Enter Your Password</label>
-        <div class="control has-icons-left has-icons-right">
-          <input class="input passwordIsNotEmpty() ? 'is-success' : 'is-danger'" @keyup.enter="login()" type="password" v-model="password" placeholder="Your Password">
-          <span class="icon is-small is-left">
-            <i class="fas fa-envelope"></i>
-          </span>
-          <span class="icon is-small is-right">
-            <i class="fas fa-exclamation-triangle"></i>
-          </span>
+        </div>      
+
+        <br/>
+        <div class="field">
+            <button class="button is-primary" style="width: 100%;" 
+              @click="login()" :disabled="!loginFieldsNotEmpty()">Login</button>
         </div>
 
-      </div>      
+        <div class="column">
+          <p>
+            <router-link to='/forgot/password'>Forgot Your Password ? Click Here to Reset</router-link>
+          </p>
+        </div>
 
-      <br/>
-      <div class="field">
-          <button class="button is-primary" style="width: 100%;" 
-            @click="login()" :disabled="!loginFieldsNotEmpty()">Login</button>
+        <div class="column">
+          <br/><br/><br/>
+          <strong>Quote of The Day</strong><br/>
+          <p>{{ qouteOfTheDay }}</p>
+        </div>
+
+
       </div>
-
-      <div class="column">
-        <p>
-          <router-link to='/forgot/password'>Forgot Your Password ? Click Here to Reset</router-link>
-        </p>
-      </div>
-
-      <div class="column">
-        <br/><br/><br/>
-        <strong>Quote of The Day</strong><br/>
-        <p>{{ qouteOfTheDay }}</p>
-      </div>
-
-
+      
     </div>
    
   </div>
@@ -89,7 +97,7 @@ export default {
 
       try {
 
-          await axios.post('http://127.0.0.1:4200/api/auth/validate',
+          await axios.post(this.$store.state.baseApi + '/api/auth/validate',
                             {
                               email: this.email,
                               password: this.password
@@ -155,16 +163,26 @@ export default {
 
         this.qouteOfTheDay = data.contents.quotes[0].quote
 
+        this.$store.commit('updateQoD', this.qouteOfTheDay)
+
       }catch (error) {
         console.log(error);
 
       }
       
+    },
+
+    checkAuth() {
+      if (this.$store.state.user != null) 
+        this.$router.push('/dashboard')
     }
 
   },
 
   mounted() {
+
+    //Check Auth
+    this.checkAuth()
 
     //Pull Quote of The Day
     this.pullQoD()
