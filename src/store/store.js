@@ -1,9 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
+
+	plugins: [ createPersistedState() ],
 
 	state: {
 		appName: 'Trackr',
@@ -18,6 +21,13 @@ export const store = new Vuex.Store({
 	},
 
 	mutations: {
+
+		//On Success Auth
+		successAuth: (state, token) => {
+
+			state.user.token = token
+
+		},
 
 		//Update Quote of The Day From Login Component
 		updateQoD: (state, iQoD) => {

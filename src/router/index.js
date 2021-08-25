@@ -5,9 +5,18 @@ import Router from 'vue-router'
 import Login from '@/components/auth/Login'
 import ForgotPassword from '@/components/auth/ForgotPassword'
 import DashboardComponent from '@/components/admin/DashboardComponent'
+import { store } from '../store/store'
 
 Vue.use(Router)
 
+
+const validateAuth = (from, to, next) => {
+	if (store.state.user.token.length == null) {
+		next('/login')
+	}
+
+	next()
+}
 
 export default new Router({
 
@@ -16,7 +25,7 @@ export default new Router({
 	routes: [
 
 		//Dashboard 
-		{ path: '/dashboard', name: 'Dashboard', component: DashboardComponent },
+		{ path: '/dashboard', name: 'Dashboard', component: DashboardComponent, beforeEnter: validateAuth },
 
 		//Forgot Password
 		{ path: '/forgot/password', name: 'ForgotPassword', component: ForgotPassword },

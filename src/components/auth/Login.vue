@@ -11,8 +11,6 @@
 
       <div class="column is-one-third">
 
-
-
         <div class="field">
           <label class="label">Account Login | Enter Your Email</label>
 
@@ -33,7 +31,7 @@
           <div class="control has-icons-left has-icons-right">
             <input class="input passwordIsNotEmpty() ? 'is-success' : 'is-danger'" @keyup.enter="login()" type="password" v-model="password" placeholder="Your Password">
             <span class="icon is-small is-left">
-              <i class="fas fa-envelope"></i>
+              <i class="fas fa-key"></i>
             </span>
             <span class="icon is-small is-right">
               <i class="fas fa-exclamation-triangle"></i>
@@ -106,7 +104,13 @@ export default {
 
                               const data = res.data
 
-                              if (data.status == "ERROR") {
+                              if (data.status == "SUCCESS") {
+                                //Setting Token With Vuex
+                                this.$store.commit('successAuth', data['token'])
+
+                                this.$router.push('/dashboard')
+
+                              }else {
                                 //Toasting
                                 Swal.fire({
                                   title: 'Error!',
