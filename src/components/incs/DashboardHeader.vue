@@ -26,13 +26,13 @@
             Users
           </router-link>
 
-          <a class="navbar-item">
+          <router-link to="/projects" class="navbar-item">
             Projects
-          </a>
+          </router-link>
 
-          <a class="navbar-item">
+          <router-link to="/projects/milestones" class="navbar-item">
             Milestones
-          </a>
+          </router-link>
 
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link">
@@ -40,13 +40,15 @@
             </a>
 
             <div class="navbar-dropdown">
-              <a class="navbar-item">
+              <router-link to="/login/logs" class="navbar-item">
                 Login Logs
-              </a>
+              </router-link>
+
               <hr class="navbar-divider">
-              <a class="navbar-item">
+              <router-link to="/change/my/password" class="navbar-item">
                 Change My Password
-              </a>
+              </router-link>
+              
             </div>
           </div>
         </div>

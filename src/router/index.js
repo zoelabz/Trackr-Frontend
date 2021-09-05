@@ -7,6 +7,11 @@ import ForgotPassword from '@/components/auth/ForgotPassword'
 import DashboardComponent from '@/components/admin/DashboardComponent'
 
 import ManageUsersComponent from '@/components/admin/ManageUsersComponent'
+import ChangePasswordComponent from '@/components/auth/ChangePasswordComponent'
+import LoginLogsComponent from '@/components/auth/LoginLogsComponent'
+
+import MilestonesComponent from '@/components/pages/MilestonesComponent'
+import ProjectComponent from '@/components/pages/ProjectComponent'
 
 import { store } from '../store/store'
 
@@ -26,6 +31,18 @@ export default new Router({
 	mode: "history",
 
 	routes: [
+
+		//Change My Password
+		{ path: '/change/my/password', name: 'ChangePassword', component: ChangePasswordComponent },
+
+		//Login Logs
+		{ path: '/login/logs', name: 'LoginLogs', component: LoginLogsComponent },
+
+		//Milestones
+		{ path: '/projects/milestones', name: 'ProjectsMilestones', component: MilestonesComponent },
+
+		//Projects
+		{ path: '/projects', name: 'Projects', component: ProjectComponent },
 
 		//Manage Users
 		{ path: '/manage/users', name: 'ManageUsers', component: ManageUsersComponent },
