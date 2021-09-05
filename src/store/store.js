@@ -11,9 +11,9 @@ export const store = new Vuex.Store({
 	state: {
 		appName: 'Trackr',
 		
-		// baseApi: 'https://apitrackr.damotiva.com',
+		baseApi: 'https://apitrackr.damotiva.com',
 
-		baseApi: 'http://localhost:4200',
+		// baseApi: 'http://localhost:4200',
 
 		QoD: '',
 
