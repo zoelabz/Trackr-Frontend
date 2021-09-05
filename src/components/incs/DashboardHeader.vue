@@ -4,9 +4,10 @@
     
     <nav class="navbar" role="navigation" aria-label="main navigation" style="border-bottom: 1px solid #359e6b;">
       <div class="navbar-brand">
-        <a class="navbar-item" href="https://bulma.io">
+        
+        <router-link to="/dashboard" class="navbar-item">
           <img src="@/assets/logo.png"> <strong>Trackr</strong>
-        </a>
+        </router-link>
 
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
           <span aria-hidden="true"></span>
