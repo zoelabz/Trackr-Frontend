@@ -11,7 +11,11 @@ import DashboardHeader from '../incs/DashboardHeader.vue'
 
 export default {
     components: { DashboardHeader },
-    name: 'MilestonesComponent'
+    name: 'MilestonesComponent',
+
+    created: function () {
+			document.title = "Milestones | " + this.$store.state.appName 
+	},
 }
 
 </script>

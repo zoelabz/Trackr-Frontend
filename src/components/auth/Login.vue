@@ -89,6 +89,10 @@ export default {
     
   },
 
+  created: function () {
+			document.title = "Login | " + this.$store.state.appName 
+	},
+
   methods: {
 
     async login() {

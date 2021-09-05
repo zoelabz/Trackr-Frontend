@@ -162,6 +162,10 @@
             }
         },
 
+        created: function () {
+            document.title = "Users | " + this.$store.state.appName 
+        },
+
         mounted: function () {
 
             this.fetchUsersList()

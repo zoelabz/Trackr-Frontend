@@ -17,6 +17,10 @@ export default {
     components: {
 			'DashboardHeader': DashboardHeader
 	},
+
+    created: function () {
+			document.title = "Change Password | " + this.$store.state.appName 
+	},
     
 }
 

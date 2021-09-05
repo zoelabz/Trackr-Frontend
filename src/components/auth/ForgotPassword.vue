@@ -75,6 +75,10 @@ export default {
     
   },
 
+  created: function () {
+			document.title = "Forgot Password | " + this.$store.state.appName 
+	},
+
   methods: {
 
     async resetPassword() {

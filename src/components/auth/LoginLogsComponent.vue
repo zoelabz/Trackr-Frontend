@@ -19,6 +19,10 @@ export default {
 			'DashboardHeader': DashboardHeader
 	},
 
+    created: function () {
+			document.title = "Login Logs | " + this.$store.state.appName 
+	},
+
 }
 
 </script>

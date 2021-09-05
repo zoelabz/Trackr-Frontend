@@ -43,6 +43,10 @@
 			'DashboardHeader': DashboardHeader
 		},
 
+		created: function () {
+			document.title = "Dashboard | " + this.$store.state.appName 
+		},
+
 		data() {
 			return {
 				userLevel: this.$store.state.user.level,
