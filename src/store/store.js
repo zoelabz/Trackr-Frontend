@@ -11,11 +11,17 @@ export const store = new Vuex.Store({
 	state: {
 		appName: 'Trackr',
 		
-		baseApi: 'https://apitrackr.damotiva.com',
+		// baseApi: 'https://apitrackr.damotiva.com',
+
+		baseApi: 'http://localhost:4200',
 
 		QoD: '',
 
 		user: null,
+
+		userFull: '',
+
+		userLevel: '',
 
 		authToken: null
 	},
@@ -26,6 +32,7 @@ export const store = new Vuex.Store({
 		successAuth: (state, payload) => {
 
 			state.authToken = payload.token
+			state.user = payload.user
 
 		},
 

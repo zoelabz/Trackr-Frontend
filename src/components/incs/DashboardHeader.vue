@@ -21,12 +21,16 @@
             Dashboard
           </router-link>
 
-          <router-link to="/manage/users" class="navbar-item">
+          <router-link to="/manage/users" class="navbar-item" v-if="isAdmin()">
             Users
           </router-link>
 
           <a class="navbar-item">
             Projects
+          </a>
+
+          <a class="navbar-item">
+            Milestones
           </a>
 
           <div class="navbar-item has-dropdown is-hoverable">
@@ -50,8 +54,8 @@
           <div class="navbar-item">
             <div class="buttons">
               <a href="#">
-                <i class="fa fa-user-o" aria-hidden="true"></i>&nbsp;
-                <span>Welcome Elijah</span><sup>Admin</sup>&nbsp;
+                <i class="fa fa-user" aria-hidden="true"></i>&nbsp;
+                <span>Welcome {{ this.$store.state.user.firstName }}</span>&nbsp;&nbsp;
               </a>
 
               <a class="button is-danger" @click="logout()">
@@ -91,6 +95,18 @@ import Swal from 'sweetalert2'
       },
 
       methods: {
+
+        isAdmin() {
+          
+          if (this.$store.state.user.level == 1) {
+            return true
+
+          }else {
+            return false
+
+          }
+
+        },
 
         async logout() {
 
