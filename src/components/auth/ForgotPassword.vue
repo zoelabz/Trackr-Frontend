@@ -89,7 +89,7 @@ export default {
 
                               const data = res.data
 
-                              if (data.status == "SUCCESS") {
+                              if (data.status == true) {
                                 //Toasting
                                 Swal.fire({
                                   title: 'Error!',

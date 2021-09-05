@@ -17,13 +17,13 @@
 
       <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
-          <a class="navbar-item">
+          <router-link to="/dashboard" class="navbar-item">
             Dashboard
-          </a>
+          </router-link>
 
-          <a class="navbar-item">
+          <router-link to="/manage/users" class="navbar-item">
             Users
-          </a>
+          </router-link>
 
           <a class="navbar-item">
             Projects

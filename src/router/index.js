@@ -5,6 +5,9 @@ import Router from 'vue-router'
 import Login from '@/components/auth/Login'
 import ForgotPassword from '@/components/auth/ForgotPassword'
 import DashboardComponent from '@/components/admin/DashboardComponent'
+
+import ManageUsersComponent from '@/components/admin/ManageUsersComponent'
+
 import { store } from '../store/store'
 
 Vue.use(Router)
@@ -23,6 +26,9 @@ export default new Router({
 	mode: "history",
 
 	routes: [
+
+		//Manage Users
+		{ path: '/manage/users', name: 'ManageUsers', component: ManageUsersComponent },
 
 		//Dashboard 
 		{ path: '/dashboard', name: 'Dashboard', component: DashboardComponent, beforeEnter: validateAuth },

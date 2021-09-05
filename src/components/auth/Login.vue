@@ -95,7 +95,7 @@ export default {
 
       try {
 
-          await axios.post(this.$store.state.baseApi + '/api/auth/validate',
+          await axios.post(this.$store.state.baseApi + '/api/auth/login',
                             {
                               email: this.email,
                               password: this.password
@@ -103,8 +103,8 @@ export default {
                             }).then( (res) => {
 
                               const data = res.data
-
-                              if (data.status == "SUCCESS") {
+                
+                              if (data.status == true) {
                                 //Setting Token With Vuex
                                 this.$store.commit('successAuth', data['token'])
 
