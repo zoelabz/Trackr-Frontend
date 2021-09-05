@@ -73,6 +73,7 @@
 <script>
 
 import axios from 'axios';
+import Swal from 'sweetalert2'
 
   export default {
     name: 'DashboardHeader',
@@ -95,19 +96,26 @@ import axios from 'axios';
 
           try {
 
-            await axios.post(this.$store.state.baseApi + '/api/auth/logout', {
+            await axios.put(this.$store.state.baseApi + '/api/auth/logout', {
               user: this.$store.state.user
             }).then( (response) => {
 
               const data = response.data
 
-              if (data.status == "SUCCESS") {
+              if (data.status == true) {
                 //Remove User on Session
                 this.$store.commit('removeUserOnSession')
 
+                //Redirect to Login
+                this.$router.push('/')
+
               }else {
                 //Failed to Logout
-
+                Swal.fire({
+                  title: 'Error!',
+                  text: 'Failed to Logout',
+                  icon: 'error'
+                })
               }
 
             }).catch( (error) => {

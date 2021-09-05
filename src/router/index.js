@@ -14,8 +14,8 @@ Vue.use(Router)
 
 
 const validateAuth = (from, to, next) => {
-	if (store.state.user.token.length == null) {
-		next('/login')
+	if (store.state.authToken == null) {
+		next('/')
 	}
 
 	next()

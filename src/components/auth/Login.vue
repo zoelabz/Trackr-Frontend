@@ -106,7 +106,9 @@ export default {
                 
                               if (data.status == true) {
                                 //Setting Token With Vuex
-                                this.$store.commit('successAuth', data['token'])
+                                this.$store.commit('successAuth', {
+                                  token: data.token
+                                })
 
                                 this.$router.push('/dashboard')
 

@@ -17,15 +17,15 @@ export const store = new Vuex.Store({
 
 		user: null,
 
-		token: null
+		authToken: null
 	},
 
 	mutations: {
 
 		//On Success Auth
-		successAuth: (state, token) => {
+		successAuth: (state, payload) => {
 
-			state.user.token = token
+			state.authToken = payload.token
 
 		},
 
@@ -36,7 +36,7 @@ export const store = new Vuex.Store({
 
 		removeUserOnSession: (state) => {
 			state.user = null
-			state.token = null
+			state.authToken = null
 		}
 
 

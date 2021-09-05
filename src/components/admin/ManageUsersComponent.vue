@@ -182,6 +182,10 @@
                                 lastName : this.lastName,
                                 email : this.email,
                                 password : this.password
+                            }, {
+                                headers: {
+                                    'Authorization': 'token ' + this.$store.getters.getAuthToken
+                                }
                             }).then( res => {
 
                                 const data = res.data
@@ -255,7 +259,11 @@
                     }).then((result) => {
                     if (result.isConfirmed) {
 
-                        axios.delete(this.$store.state.baseApi + '/api/user/delete/' + userId)
+                        axios.delete(this.$store.state.baseApi + '/api/user/delete/' + userId, {
+                                headers: {
+                                    'Authorization': 'token ' + this.$store.getters.getAuthToken
+                                }
+                            })
                             .then( res => {
 
                                 const data = res.data
@@ -290,7 +298,11 @@
             },
 
             async fetchUsersList() {
-                await axios.get(this.$store.state.baseApi + "/api/user/all")
+                await axios.get(this.$store.state.baseApi + "/api/user/all", {
+                                headers: {
+                                    'Authorization': 'token ' + this.$store.getters.getAuthToken
+                                }
+                            })
                     .then( res => {
 
                         const data = res.data
