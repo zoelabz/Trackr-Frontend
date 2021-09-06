@@ -19,24 +19,28 @@
       <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
           <router-link to="/dashboard" class="navbar-item">
-            Dashboard
+            <i class="fas fa-home"></i>&nbsp;Dashboard
+          </router-link>
+
+          <router-link to="/organizations" class="navbar-item" v-if="isAdmin()">
+            <i class="fas fa-sitemap"></i>&nbsp;Organizations
           </router-link>
 
           <router-link to="/manage/users" class="navbar-item" v-if="isAdmin()">
-            Users
+            <i class="fas fa-users"></i>&nbsp;Users
           </router-link>
 
           <router-link to="/projects" class="navbar-item">
-            Projects
+            <i class="fas fa-project-diagram"></i>&nbsp;Projects
           </router-link>
 
           <router-link to="/projects/milestones" class="navbar-item">
-            Milestones
+            <i class="fas fa-tasks"></i>&nbsp;Milestones
           </router-link>
 
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link">
-              Settings
+              <i class="fas fa-cogs"></i>&nbsp;Settings
             </a>
 
             <div class="navbar-dropdown">

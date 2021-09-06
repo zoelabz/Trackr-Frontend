@@ -20,7 +20,7 @@
               <i class="fas fa-envelope"></i>
             </span>
             <span class="icon is-small is-right">
-              <i class="fas fa-exclamation-triangle"></i>
+              <i class="fas fa-check" v-if="validateEmail()"></i>
             </span>
           </div>
 
@@ -34,7 +34,7 @@
               <i class="fas fa-key"></i>
             </span>
             <span class="icon is-small is-right">
-              <i class="fas fa-exclamation-triangle"></i>
+              <i class="fas fa-check" v-if="passwordIsNotEmpty()"></i>
             </span>
           </div>
 
@@ -94,6 +94,11 @@ export default {
 	},
 
   methods: {
+
+    validateEmail() {
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(this.email).toLowerCase());
+    },
 
     async login() {
 

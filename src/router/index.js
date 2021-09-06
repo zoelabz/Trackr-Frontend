@@ -10,6 +10,7 @@ import ManageUsersComponent from '@/components/admin/ManageUsersComponent'
 import ChangePasswordComponent from '@/components/auth/ChangePasswordComponent'
 import LoginLogsComponent from '@/components/auth/LoginLogsComponent'
 
+import OrganizationComponent from '@/components/pages/OrganizationComponent'
 import MilestonesComponent from '@/components/pages/MilestonesComponent'
 import ProjectComponent from '@/components/pages/ProjectComponent'
 
@@ -43,6 +44,9 @@ export default new Router({
 
 		//Projects
 		{ path: '/projects', name: 'Projects', component: ProjectComponent },
+
+		//Organizations
+		{ path: '/organizations', name: 'Organizations', component: OrganizationComponent },
 
 		//Manage Users
 		{ path: '/manage/users', name: 'ManageUsers', component: ManageUsersComponent },
